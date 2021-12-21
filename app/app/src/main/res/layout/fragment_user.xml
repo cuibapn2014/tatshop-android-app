@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<FrameLayout
+    android:id="@+id/card_info"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    android:background="@drawable/top_background">
+    <com.sdsmdg.harjot.materialshadows.MaterialShadowFrameLayoutWrapper
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+<com.google.android.material.imageview.ShapeableImageView
+    android:layout_width="80dp"
+    android:layout_height="80dp"
+    android:scaleType="centerCrop"
+    android:src="@drawable/av"
+    android:layout_gravity="bottom"
+    app:shapeAppearanceOverlay="@style/circular"
+    android:layout_marginBottom="@dimen/_20sdp"
+    android:layout_marginLeft="@dimen/_20sdp"
+    android:background="@drawable/shape"
+    android:elevation="5dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mạnh Tuấn"
+            android:textSize="@dimen/_14sdp"
+            android:textColor="@color/white"
+            android:layout_marginBottom="@dimen/_40sdp"
+            android:layout_marginLeft="@dimen/_90sdp"
+            android:layout_gravity="bottom"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="example@gmail.com"
+            android:textSize="@dimen/_12sdp"
+            android:textColor="@color/white"
+            android:layout_marginBottom="@dimen/_22sdp"
+            android:layout_marginLeft="@dimen/_90sdp"
+            android:layout_gravity="bottom"/>
+    </com.sdsmdg.harjot.materialshadows.MaterialShadowFrameLayoutWrapper>
+</FrameLayout>
+    <LinearLayout
+        android:layout_below="@+id/card_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/_5sdp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""/>
+    </LinearLayout>
+</RelativeLayout>

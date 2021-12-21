@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="ldpi"></dimen>
+
+    <dimen name="mdpi"></dimen>
+
+    <dimen name="hdpi"></dimen>
+
+    <dimen name="xhdpi"></dimen>
+
+    <dimen name="xxhdpi"></dimen>
+
+    <dimen name="xxxhdpi"></dimen>
+
+
+</resources>

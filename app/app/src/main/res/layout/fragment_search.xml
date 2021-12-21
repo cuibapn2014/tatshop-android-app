@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <TableLayout
+        android:id="@+id/header_search"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:background="@color/teal"
+        android:stretchColumns="0"
+        android:paddingVertical="@dimen/_3sdp"
+        android:paddingHorizontal="@dimen/_5sdp">
+        <TableRow>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/keyword"
+                android:textColorHint="@color/darkgray"
+                android:hint="Quần jean baggy.."
+                android:inputType="text"
+                android:textSize="@dimen/_10sdp"
+                android:background="@drawable/radius_conner"
+                android:layout_marginVertical="@dimen/_3sdp"
+                android:paddingHorizontal="@dimen/_5sdp"/>
+            <Button
+                android:id="@+id/btn_search"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/tranferent"
+                android:drawableEnd="@drawable/ic_search"
+                android:drawableTint="@color/white"
+                android:text="Tìm kiếm" />
+        </TableRow>
+    </TableLayout>
+    <GridView
+        android:id="@+id/grid_result_search"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:numColumns="2"
+        android:horizontalSpacing="@dimen/_5sdp"
+        android:verticalSpacing="@dimen/_5sdp"
+        android:clipToPadding="false"
+        android:layout_below="@id/header_search"/>
+</RelativeLayout>
