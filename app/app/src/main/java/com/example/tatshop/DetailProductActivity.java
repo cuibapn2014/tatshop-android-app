@@ -1,5 +1,6 @@
 package com.example.tatshop;
 
+import android.content.DialogInterface;
 import android.graphics.Paint;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +27,8 @@ import com.example.tatshop.adapter.CommentAdapter;
 import com.example.tatshop.adapter.CustomAttributeAdapter;
 import com.example.tatshop.adapter.ImageAdapter;
 import com.example.tatshop.controller.CartController;
+import com.example.tatshop.controller.CommentController;
+import com.example.tatshop.controller.UserController;
 import com.example.tatshop.model.AttributeProduct;
 import com.example.tatshop.model.Comment;
 import com.example.tatshop.model.Image;
@@ -44,16 +48,18 @@ public class DetailProductActivity extends AppCompatActivity {
     private List<Image> listImg;
     private ImageAdapter imageAdapter;
     private ViewPager viewPagerPhoto;
-    private Button btnAdd, btnUp, btnDown, btnAddItemCart;
+    private Button btnAdd, btnUp, btnDown, btnAddItemCart, submitComment;
     private CircleIndicator indicator;
     private CustomAttributeAdapter attrSizeAdapter, attrColorAdapter;
     private GridView gridViewSize, gridViewColor;
     private List<AttributeProduct> listSize, listColor;
-    private EditText mAmount;
+    private EditText mAmount, comment;
     private int amount;
     private BottomSheetDialog sheetDialog;
     private List<Comment> listCmt;
     private CommentAdapter commentAdapter;
+    private RatingBar vote;
+    private ListView lv;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,6 +77,7 @@ public class DetailProductActivity extends AppCompatActivity {
                 sheetDialog = new BottomSheetDialog(DetailProductActivity.this, R.style.BottomSheetDialogTheme);
                 View bottomSheetView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.popup_order, findViewById(R.id.dialog_attr));
                 setAmount(bottomSheetView);
+                btnAdd.setEnabled(false);
 
                 btnAddItemCart = (Button) bottomSheetView.findViewById(R.id.add_cart);
                 gridViewSize = bottomSheetView.findViewById(R.id.option_size);
@@ -85,6 +92,7 @@ public class DetailProductActivity extends AppCompatActivity {
                 btnAddItemCart.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        btnAddItemCart.setEnabled(false);
                         if (attrSizeAdapter.getAttributeProduct() != null && attrColorAdapter.getAttributeProduct() != null) {
                             List<AttributeProduct> lat = new ArrayList<>();
                             lat.add(attrSizeAdapter.getAttributeProduct());
@@ -103,6 +111,8 @@ public class DetailProductActivity extends AppCompatActivity {
                             cartController.saveDataLocal();
 
                             sheetDialog.hide();
+                            btnAdd.setEnabled(true);
+                            btnAddItemCart.setEnabled(true);
                             Toast.makeText(DetailProductActivity.this,
                                     getResources().getString(R.string.toast_success_add),
                                     Toast.LENGTH_SHORT)
@@ -113,7 +123,33 @@ public class DetailProductActivity extends AppCompatActivity {
 
                 sheetDialog.setContentView(bottomSheetView);
                 sheetDialog.show();
+                sheetDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        btnAdd.setEnabled(true);
+                    }
+                });
+            }
+        });
 
+        submitComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (UserController.getUSER() == null)
+                    return;
+                if (vote.getRating() > 0 && comment.getText().toString() != "") {
+                    Comment cmt = new Comment();
+                    cmt.setUser(UserController.getUSER());
+                    cmt.setVote((int) vote.getRating());
+                    cmt.setContent(comment.getText().toString());
+                    cmt.setIdProduct(product.getId());
+                    new CommentController().addComment(cmt, DetailProductActivity.this);
+                    listCmt.add(cmt);
+                    commentAdapter.notifyDataSetChanged();
+                    Helper.setListViewHeight(lv);
+                } else {
+                    Toast.makeText(DetailProductActivity.this, "Bạn chưa nhập đánh giá hoặc chưa bình chọn", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -122,7 +158,7 @@ public class DetailProductActivity extends AppCompatActivity {
         Gson gson = new Gson();
         product = gson.fromJson(getIntent().getStringExtra("Product"), Product.class);
         listCmt = product.getComment();
-        ListView lv = (ListView) findViewById(R.id.list_comment);
+        lv = (ListView) findViewById(R.id.list_comment);
         commentAdapter = new CommentAdapter(this, listCmt, R.layout.list_comment);
 
         if (commentAdapter.getCount() > 0) {
@@ -130,6 +166,7 @@ public class DetailProductActivity extends AppCompatActivity {
             TextView tv = findViewById(R.id.result);
             layout.removeView(tv);
         }
+
         lv.setAdapter(commentAdapter);
         Helper.setListViewHeight(lv);
 
@@ -167,7 +204,10 @@ public class DetailProductActivity extends AppCompatActivity {
         indicator = findViewById(R.id.indicator_detail);
         price = (TextView) findViewById(R.id.txt_price);
         discount = (TextView) findViewById(R.id.txtDiscount);
-        discard = (TextView) findViewById(R.id.txt_discard);
+        discard = (TextView) findViewById(R.id.original_price);
+        comment = (EditText) findViewById(R.id.comment);
+        vote = (RatingBar) findViewById(R.id.rating);
+        submitComment = (Button) findViewById(R.id.btn_submit);
     }
 
     @Override

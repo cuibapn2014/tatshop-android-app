@@ -1,8 +1,9 @@
 package com.example.tatshop.module;
 
-import android.view.MotionEvent;
+import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.GridView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -22,7 +23,7 @@ public class Helper {
         }
 
         ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = totalHeight / 2;
+        params.height = totalHeight;
         listView.setLayoutParams(params);
         listView.requestLayout();
     }
@@ -40,9 +41,26 @@ public class Helper {
             totalHeight += listItem.getMeasuredHeight();
         }
 
+        final int heightElement = totalHeight / listAdapter.getCount();
         ViewGroup.LayoutParams params = gridView.getLayoutParams();
-        params.height = totalHeight / gridView.getNumColumns() + (gridView.getVerticalSpacing() * (listAdapter.getCount() / 2)) + 30;
+        if (listAdapter.getCount() % 2 == 0)
+            params.height = totalHeight / 2 + (gridView.getVerticalSpacing() * (listAdapter.getCount() / 2)) + 30;
+        else if (listAdapter.getCount() > 1 && listAdapter.getCount() % 2 != 0)
+            params.height = totalHeight / gridView.getNumColumns() + heightElement + (gridView.getVerticalSpacing() * ((listAdapter.getCount() + 1) / 2)) + 30;
+        else
+            params.height = totalHeight + gridView.getVerticalSpacing() + 30;
         gridView.setLayoutParams(params);
         gridView.requestLayout();
+    }
+
+
+
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        View view = activity.getCurrentFocus();
+        if (view == null) {
+            view = new View(activity);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }

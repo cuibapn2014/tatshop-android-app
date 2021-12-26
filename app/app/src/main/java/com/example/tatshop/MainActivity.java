@@ -1,31 +1,17 @@
 package com.example.tatshop;
 
+import android.graphics.Color;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.graphics.Color;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
-
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.aurelhubert.ahbottomnavigation.notification.AHNotification;
-
 import com.example.tatshop.adapter.ViewPagerAdapter;
-import com.example.tatshop.api.ApiService;
 import com.example.tatshop.controller.CartController;
-import com.example.tatshop.model.Bill;
-import com.example.tatshop.model.ItemCart;
-import com.google.gson.Gson;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     private ViewPager2 viewPager2;
@@ -37,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
-        CartController.setListCartItem(DataLocalManger.getListCartItem());
         mapping();
 
         AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.nav_home, R.drawable.ic_home, R.color.white);
@@ -75,7 +60,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void changeData() {
-        int amountCartItem = CartController.getListCartItem().size();
+        int amountCartItem = 0;
+        if (CartController.getListCartItem() != null)
+            amountCartItem = CartController.getListCartItem().size();
         AHNotification notification = new AHNotification.Builder()
                 .setText(String.valueOf(amountCartItem))
                 .setBackgroundColor(ContextCompat.getColor(this, R.color.colorBottomNavigationNotification))
@@ -97,4 +84,16 @@ public class MainActivity extends AppCompatActivity {
         viewPager2.setAdapter(viewPagerAdapter);
     }
 
+    @Override
+    public void onBackPressed() {
+        if (bottomNavigationView.getCurrentItem() != 0) {
+            bottomNavigationView.setCurrentItem(0);
+        } else
+            super.onBackPressed();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
 }

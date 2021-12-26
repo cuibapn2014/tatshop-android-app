@@ -38,14 +38,16 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/btn_group"
         android:layout_below="@id/line_space"
-        android:layout_marginBottom="@dimen/_10sdp" />
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:elevation="@dimen/_5sdp"/>
 
     <LinearLayout
         android:id="@+id/btn_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/_50sdp"
+        android:layout_marginBottom="@dimen/_40sdp"
         android:background="@drawable/bg_white_stroke"
         android:elevation="@dimen/_5sdp"
         android:gravity="right"
@@ -112,7 +114,6 @@
                 android:layout_below="@id/listview_shopping_cart"
                 android:layout_marginHorizontal="@dimen/_5sdp"
                 android:background="@drawable/bg_btn_remove"
-                android:drawableRight="@drawable/ic_delete"
                 android:drawableTint="@color/white"
                 android:paddingHorizontal="@dimen/_10sdp"
                 android:text="@string/remove_cart"

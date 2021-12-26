@@ -5,10 +5,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.tatshop.ui.CartFragment;
-import com.example.tatshop.ui.HomeFragment;
-import com.example.tatshop.ui.SearchFragment;
-import com.example.tatshop.ui.UserFragment;
+import com.example.tatshop.fragment.CartFragment;
+import com.example.tatshop.fragment.HomeFragment;
+import com.example.tatshop.fragment.SearchFragment;
+import com.example.tatshop.fragment.UserFragment;
 
 public class ViewPagerAdapter extends FragmentStateAdapter {
 

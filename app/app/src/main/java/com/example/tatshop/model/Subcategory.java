@@ -19,4 +19,12 @@ public class Subcategory {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 }

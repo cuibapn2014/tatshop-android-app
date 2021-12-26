@@ -2,15 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rl"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingHorizontal="5dp"
-    android:paddingVertical="5dp"
-    android:background="@color/white">
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:elevation="@dimen/_5sdp"
+    android:layout_margin="@dimen/_5sdp">
 
     <ImageView
         android:id="@+id/img_product"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="200dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:contentDescription="@null"
@@ -19,12 +19,13 @@
 
     <TextView
         android:id="@+id/txtDiscount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_30sdp"
         android:layout_alignTop="@id/img_product"
         android:layout_alignRight="@id/img_product"
         android:background="@color/teal"
-        android:padding="@dimen/_8sdp"
+        android:padding="@dimen/_3sdp"
+        android:gravity="center"
         android:text="-5%"
         android:textColor="@color/white"
         android:textSize="16sp" />
@@ -38,15 +39,17 @@
         android:maxLines="2"
         android:minLines="2"
         android:text="Tên sản phẩm"
+        android:padding="@dimen/_5sdp"
         android:textSize="14sp" />
 
     <LinearLayout
         android:id="@+id/ln"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/product_name"
+        android:layout_height="@dimen/_18sdp"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_below="@id/product_name"
+        android:orientation="horizontal"
+        android:layout_marginBottom="@dimen/_5sdp">
 
         <TextView
             android:id="@+id/product_price"
@@ -59,14 +62,13 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/txt_discard"
+            android:id="@+id/original_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_5sdp"
-            android:gravity="center"
+            android:layout_marginHorizontal="@dimen/_5sdp"
+            android:gravity="center_vertical"
             android:text="150,000đ"
-            android:textSize="16sp" />
-
+            android:textSize="14sp" />
 
     </LinearLayout>
 </RelativeLayout>

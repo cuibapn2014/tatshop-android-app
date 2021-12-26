@@ -35,7 +35,7 @@ public class PhotoAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        if(listPhoto != null)
+        if (listPhoto != null)
             return listPhoto.size();
         return 0;
     }

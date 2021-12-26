@@ -9,11 +9,24 @@
     <string name="history">Lịch sử mua hàng</string>
     <string name="logout">Đăng xuất</string>
     <string name="login">Đăng nhập</string>
-    <string name="login_fb">Đăng nhập với Facebook</string>
+    <string name="login_fb">Login with Facebook</string>
     <string name="order">Đặt hàng</string>
     <string name="cart_header">Giỏ hàng của bạn</string>
     <string name="remove_cart">Xóa giỏ hàng</string>
     <string name="toast_success_add">Đã thêm sản phẩm vào giỏ</string>
     <string name="update_latest">Mới cập nhật</string>
     <string name="comment">Nhận xét sản phẩm</string>
+    <string name="login_title">Login</string>
+    <string name="signup_title">Sign Up</string>
+    <string name="username">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="create_account">Create a new account</string>
+    <string name="customer_info">Thông tin nhận hàng</string>
+    <string name="confirm">Xác nhận mua hàng</string>
+    <string name="my_info">Thông tin cá nhân</string>
+    <string name="facebook_app_id">973123103295488</string>
+    <string name="fb_login_protocol_scheme">fb973123103295488</string>
+    <string name="men_fashion">Thời trang nam</string>
+    <string name="women_fashion">Thời trang nữ</string>
 </resources>

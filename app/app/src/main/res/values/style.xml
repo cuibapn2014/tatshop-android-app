@@ -13,4 +13,7 @@
     <style name="ButtonStyle">
         <item name="background">@drawable/bg_btn_order</item>
     </style>
+    <style name="ButtonLoginFB">
+        <item name="android:layout_height">@dimen/_40sdp</item>
+    </style>
 </resources>

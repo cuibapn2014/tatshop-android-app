@@ -7,17 +7,22 @@ public class User {
     private String name;
     private String image;
     private int level;
+    private String email;
     @SerializedName("sex")
     private String gender;
     private String birthday;
     private String address;
     private String phone;
 
-    public User(int id, String name, String image, int level, String gender, String birthday, String address, String phone) {
+    public User() {
+    }
+
+    public User(int id, String name, String image, int level, String email, String gender, String birthday, String address, String phone) {
         this.id = id;
         this.name = name;
         this.image = image;
         this.level = level;
+        this.email = email;
         this.gender = gender;
         this.birthday = birthday;
         this.address = address;
@@ -54,6 +59,14 @@ public class User {
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getGender() {

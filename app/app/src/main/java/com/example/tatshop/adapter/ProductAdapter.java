@@ -1,9 +1,7 @@
 package com.example.tatshop.adapter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Paint;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +11,10 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import com.example.tatshop.R;
 import com.example.tatshop.controller.CartController;
 import com.example.tatshop.model.Product;
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -70,7 +64,7 @@ public class ProductAdapter extends BaseAdapter {
 
     public void isDiscount(Product product, View v) {
         TextView discount = (TextView) v.findViewById(R.id.txtDiscount);
-        TextView discard = (TextView) v.findViewById(R.id.txt_discard);
+        TextView discard = (TextView) v.findViewById(R.id.original_price);
         if (product.getDiscount() > 0) {
             discount.setText("-" + String.valueOf(product.getDiscount()) + "%");
             discard.setPaintFlags(discard.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);

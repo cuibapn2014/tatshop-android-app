@@ -10,15 +10,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+
+import com.aurelhubert.ahbottomnavigation.notification.AHNotification;
+import com.example.tatshop.MainActivity;
 import com.example.tatshop.R;
 import com.example.tatshop.controller.CartController;
 import com.example.tatshop.model.Product;
 import com.squareup.picasso.Picasso;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.List;
-import java.util.Locale;
 
 public class ItemCartAdapter extends BaseAdapter {
     private Activity context;
@@ -52,29 +53,37 @@ public class ItemCartAdapter extends BaseAdapter {
         LayoutInflater layoutInflater = this.context.getLayoutInflater();
         convertView = layoutInflater.inflate(this.layoutId, null);
         setData(convertView, position);
-
         return convertView;
     }
 
-    private void setAmount(View convertView, EditText mAmount) {
+    private void setAmount(View convertView, EditText mAmount, int position) {
+        TextView txtTotal = context.findViewById(R.id.total_price);
         Button btnUp = (Button) convertView.findViewById(R.id.btn_up);
         Button btnDown = (Button) convertView.findViewById(R.id.btn_down);
-        amount = Integer.parseInt(String.valueOf(mAmount.getText()));
-
         btnUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                amount = Integer.parseInt(String.valueOf(mAmount.getText()));
                 amount++;
                 mAmount.setText(String.valueOf(amount));
+                list.get(position).setQty(amount);
+                list.set(position, list.get(position));
+                CartController.updateCartItem(list.get(position), position);
+                txtTotal.setText(CartController.nf.format(CartController.getTotalPrice()));
             }
         });
 
         btnDown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                amount = Integer.parseInt(String.valueOf(mAmount.getText()));
                 if (amount > 1)
                     amount--;
                 mAmount.setText(String.valueOf(amount));
+                list.get(position).setQty(amount);
+                list.set(position, list.get(position));
+                CartController.updateCartItem(list.get(position), position);
+                txtTotal.setText(CartController.nf.format(CartController.getTotalPrice()));
             }
         });
     }
@@ -85,7 +94,9 @@ public class ItemCartAdapter extends BaseAdapter {
         TextView txtAttr = (TextView) convertView.findViewById(R.id.attr_item);
         TextView price = (TextView) convertView.findViewById(R.id.price);
         EditText mAmount = (EditText) convertView.findViewById(R.id.amount_order);
-        TextView txtTotal = (TextView) convertView.findViewById(R.id.total_price);
+        TextView btnRemoveItem = (TextView) convertView.findViewById(R.id.btn_remove_item);
+        btnRemoveItem.setTag(position);
+        mAmount.setTag(position);
 
         final Product product = list.get(position);
         String strAttr = null;
@@ -97,10 +108,34 @@ public class ItemCartAdapter extends BaseAdapter {
         strAttr = size + " - " + color;
         txtAttr.setText(strAttr);
         mAmount.setText(qty);
-
-        String priceTxt = CartController.nf.format(product.getPrice());
+        float discount = 1 - (float) product.getDiscount() / 100;
+        String priceTxt = CartController.nf.format(product.getPrice() * discount);
         price.setText(priceTxt);
 
-        setAmount(convertView, mAmount);
+        setAmount(convertView, mAmount, position);
+        setRemoveItem(convertView, btnRemoveItem, position);
+    }
+
+    private void setRemoveItem(View convertView, TextView btnRemoveItem, int position) {
+        btnRemoveItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView txtTotal = context.findViewById(R.id.total_price);
+                CartController.removeCartItem((Product)getItem(position));
+                ItemCartAdapter.this.notifyDataSetChanged();
+                txtTotal.setText(CartController.nf.format(CartController.getTotalPrice()));
+                changeData();
+            }
+        });
+    }
+
+    public void changeData() {
+        int amountCartItem = CartController.getListCartItem().size();
+        AHNotification notification = new AHNotification.Builder()
+                .setText(String.valueOf(amountCartItem))
+                .setBackgroundColor(ContextCompat.getColor(context, R.color.colorBottomNavigationNotification))
+                .setTextColor(ContextCompat.getColor(context, R.color.white))
+                .build();
+        MainActivity.bottomNavigationView.setNotification(notification, 2);
     }
 }

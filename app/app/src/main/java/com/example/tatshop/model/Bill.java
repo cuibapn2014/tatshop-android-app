@@ -11,18 +11,19 @@ public class Bill {
     private int total;
     private int discount;
     private String created_at;
+    private String image;
     private String email;
     private String address;
     private String phone;
     private int stt;
     private int pay;
     @SerializedName("payment")
-    private List<ItemCart> item;
+    private List<Item> item;
 
     public Bill() {
     }
 
-    public Bill(int id, String name, int total, int discount, String created_at, String email, String address, String phone, int stt, int pay, List<ItemCart> item) {
+    public Bill(int id, String name, int total, int discount, String created_at, String image,String email, String address, String phone, int stt, int pay, List<Item> item) {
         this.id = id;
         this.name = name;
         this.total = total;
@@ -116,11 +117,11 @@ public class Bill {
         this.pay = pay;
     }
 
-    public List<ItemCart> getItem() {
+    public List<Item> getItem() {
         return item;
     }
 
-    public void setItem(List<ItemCart> item) {
+    public void setItem(List<Item> item) {
         this.item = item;
     }
 }

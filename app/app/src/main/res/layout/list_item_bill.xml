@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:layout_marginTop="@dimen/_10sdp"
+    android:paddingTop="@dimen/_10sdp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="@dimen/_10sdp">
+
+        <TextView
+            android:id="@+id/bill_key"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:paddingVertical="@dimen/_5sdp"
+            android:text="Mã hóa đơn"
+            android:layout_alignParentLeft="true"
+            android:textColor="@color/dark"
+            android:textSize="@dimen/_12ssp" />
+        <TextView
+            android:id="@+id/status_ship"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/bg_wait"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:paddingVertical="@dimen/_2sdp"
+            android:text="Chờ xác nhận"
+            android:textColor="@color/warning"
+            android:textSize="@dimen/_12ssp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1sp"
+        android:layout_marginVertical="@dimen/_5sdp"
+        android:background="@color/line_space" />
+
+    <ListView
+        android:id="@+id/list_item_bought"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1sp"
+        android:layout_marginVertical="@dimen/_5sdp"
+        android:background="@color/line_space" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|right"
+        android:padding="@dimen/_10sdp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:gravity="center"
+            android:padding="@dimen/_5sdp"
+            android:text="Tổng: " />
+
+        <TextView
+            android:id="@+id/total_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:gravity="center"
+            android:text="1,500,000đ"
+            android:textColor="@color/teal"
+            android:textSize="@dimen/_16sdp" />
+    </LinearLayout>
+</LinearLayout>

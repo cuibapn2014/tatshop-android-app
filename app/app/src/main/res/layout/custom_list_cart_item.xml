@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:layout_margin="@dimen/_5sdp">
+
+    <TextView
+        android:id="@+id/btn_remove_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/_5sdp"
+        android:drawableRight="@drawable/ic_delete" />
 
     <TableLayout
         android:id="@+id/cart_item"
@@ -88,6 +99,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1sp"
+        android:layout_marginHorizontal="@dimen/_5sdp"
         android:layout_below="@id/cart_item"
         android:background="@drawable/bg_white_stroke" />
 </RelativeLayout>
