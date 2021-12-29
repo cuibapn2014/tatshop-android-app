@@ -24,8 +24,6 @@ import com.example.tatshop.model.Product;
 import com.example.tatshop.module.Helper;
 import com.google.gson.Gson;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 import retrofit2.Call;

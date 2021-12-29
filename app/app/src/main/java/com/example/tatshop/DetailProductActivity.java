@@ -92,8 +92,8 @@ public class DetailProductActivity extends AppCompatActivity {
                 btnAddItemCart.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        btnAddItemCart.setEnabled(false);
                         if (attrSizeAdapter.getAttributeProduct() != null && attrColorAdapter.getAttributeProduct() != null) {
+                            btnAddItemCart.setEnabled(false);
                             List<AttributeProduct> lat = new ArrayList<>();
                             lat.add(attrSizeAdapter.getAttributeProduct());
                             lat.add(attrColorAdapter.getAttributeProduct());
@@ -136,19 +136,21 @@ public class DetailProductActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (UserController.getUSER() == null)
-                    return;
-                if (vote.getRating() > 0 && comment.getText().toString() != "") {
-                    Comment cmt = new Comment();
-                    cmt.setUser(UserController.getUSER());
-                    cmt.setVote((int) vote.getRating());
-                    cmt.setContent(comment.getText().toString());
-                    cmt.setIdProduct(product.getId());
-                    new CommentController().addComment(cmt, DetailProductActivity.this);
-                    listCmt.add(cmt);
-                    commentAdapter.notifyDataSetChanged();
-                    Helper.setListViewHeight(lv);
-                } else {
-                    Toast.makeText(DetailProductActivity.this, "Bạn chưa nhập đánh giá hoặc chưa bình chọn", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DetailProductActivity.this, "Vui lòng đăng nhập để sử dụng tính năng này", Toast.LENGTH_SHORT).show();
+                else {
+                    if (vote.getRating() > 0 && comment.getText().toString().trim().length() > 0) {
+                        Comment cmt = new Comment();
+                        cmt.setUser(UserController.getUSER());
+                        cmt.setVote((int) vote.getRating());
+                        cmt.setContent(comment.getText().toString());
+                        cmt.setIdProduct(product.getId());
+                        new CommentController().addComment(cmt, DetailProductActivity.this);
+                        listCmt.add(cmt);
+                        commentAdapter.notifyDataSetChanged();
+                        Helper.setListViewHeight(lv);
+                    } else {
+                        Toast.makeText(DetailProductActivity.this, "Bạn chưa nhập đánh giá hoặc chưa bình chọn", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });

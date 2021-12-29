@@ -29,7 +29,6 @@ public class SplashScreen extends AppCompatActivity {
         UserController.isLogin();
         if (CartController.getListCartItem() == null)
             CartController.setListCartItem(new ArrayList<Product>());
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

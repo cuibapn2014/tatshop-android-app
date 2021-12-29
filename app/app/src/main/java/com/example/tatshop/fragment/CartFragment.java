@@ -73,7 +73,7 @@ public class CartFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Helper.hideKeyboard(getActivity());
-                CartController.applyCode(code.getText().toString().trim(), txtTotal);
+                CartController.applyCode(code.getText().toString().trim(), txtTotal, getActivity());
             }
         });
     }

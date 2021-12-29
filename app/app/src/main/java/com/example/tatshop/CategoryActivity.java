@@ -2,6 +2,7 @@ package com.example.tatshop;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -86,7 +87,7 @@ public class CategoryActivity extends AppCompatActivity {
     }
 
     private void loadNextPage() {
-        Handler handler = new Handler();
+        Handler handler = new Handler(Looper.getMainLooper());
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {

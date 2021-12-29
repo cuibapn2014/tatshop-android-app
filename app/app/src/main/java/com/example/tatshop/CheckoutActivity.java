@@ -108,6 +108,7 @@ public class CheckoutActivity extends AppCompatActivity {
             item.setName(product.getTitle());
             item.setId_product(product.getId());
             item.setAttr(product.getAttr().get(0).getValue() + " - " + product.getAttr().get(1).getValue());
+            item.setImage(product.getThumbnail());
             item.setPrice(product.getPrice());
             item.setQty(product.getQty());
             item.setStatus(0);

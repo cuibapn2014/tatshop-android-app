@@ -35,13 +35,16 @@ public class Helper {
         }
 
         int totalHeight = 0;
+        int heightElement = 0;
+
         for (int i = 0; i < listAdapter.getCount(); i++) {
             View listItem = listAdapter.getView(i, null, gridView);
             listItem.measure(0, 0);
             totalHeight += listItem.getMeasuredHeight();
+            heightElement = listItem.getMeasuredHeight();
         }
 
-        final int heightElement = totalHeight / listAdapter.getCount();
+
         ViewGroup.LayoutParams params = gridView.getLayoutParams();
         if (listAdapter.getCount() % 2 == 0)
             params.height = totalHeight / 2 + (gridView.getVerticalSpacing() * (listAdapter.getCount() / 2)) + 30;

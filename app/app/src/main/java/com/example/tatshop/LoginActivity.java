@@ -61,6 +61,7 @@ public class LoginActivity extends AppCompatActivity {
 
         callbackManager = CallbackManager.Factory.create();
         LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButton.setPermissions("email");
         LoginManager.getInstance().registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
                     @Override
@@ -76,16 +77,19 @@ public class LoginActivity extends AppCompatActivity {
                                         // Application code
                                         try {
                                             User user = new User();
-                                            user.setEmail(object.getString("email"));
-                                            user.setName(object.getString("name"));
-                                            UserController.loginFacebook(user, LoginActivity.this);
+                                            if (object != null) {
+                                                user.setEmail(object.getString("email"));
+                                                user.setName(object.getString("name"));
+                                                user.setImage(object.getString("picture"));
+                                                UserController.loginFacebook(user, LoginActivity.this);
+                                            }
                                         } catch (JSONException e) {
                                             e.printStackTrace();
                                         }
                                     }
                                 });
                         Bundle parameters = new Bundle();
-                        parameters.putString("fields", "id, name, email");
+                        parameters.putString("fields", "id, name, email, picture");
                         request.setParameters(parameters);
                         request.executeAsync();
                         Log.e("Tag", "Success");
